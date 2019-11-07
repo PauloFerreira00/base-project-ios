@@ -16,7 +16,8 @@ extension UINib {
     }
 
     enum Name: String {
-        case start = "StartViewController"
+        case login = "LoginViewController"
+        case home = "HomeViewController"
     }
 }
 
@@ -51,9 +52,5 @@ extension UIStoryboard {
 
     enum Name: String {
         case main = "Main"
-        case detailsInformation = "DetailsInformation"
-        case home = "Home"
-        case information = "Information"
-        case termos = "Termos"
     }
 }
