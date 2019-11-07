@@ -48,6 +48,10 @@
 		53839E0423749057001F54C8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53839E0123749057001F54C8 /* Coordinator.swift */; };
 		53839E0A2374956F001F54C8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53839E082374956F001F54C8 /* HomeViewController.swift */; };
 		53839E0B2374956F001F54C8 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53839E092374956F001F54C8 /* HomeViewController.xib */; };
+		53839E10237498E1001F54C8 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53839E0F237498E1001F54C8 /* LoginCoordinator.swift */; };
+		53839E1423749955001F54C8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53839E1223749955001F54C8 /* LoginViewController.swift */; };
+		53839E1523749955001F54C8 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53839E1323749955001F54C8 /* LoginViewController.xib */; };
+		53839E182374A864001F54C8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53839E172374A864001F54C8 /* LoginViewModel.swift */; };
 		665BF13AF3F1F7959461C0D0 /* Pods_BaseProject_BaseProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093235B5AE5061024C77E888 /* Pods_BaseProject_BaseProjectUITests.framework */; };
 		75588FC81535045FB5801FEC /* Pods_BaseProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A651984156CC4E92BC4CFF7B /* Pods_BaseProjectTests.framework */; };
 /* End PBXBuildFile section */
@@ -118,6 +122,10 @@
 		53839E0123749057001F54C8 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		53839E082374956F001F54C8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		53839E092374956F001F54C8 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		53839E0F237498E1001F54C8 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		53839E1223749955001F54C8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		53839E1323749955001F54C8 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		53839E172374A864001F54C8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		61F55FFA936E8E7C3C54A6F1 /* Pods_BaseProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		776A7B6E928D6DF5289A7C95 /* Pods-BaseProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectTests.release.xcconfig"; path = "Target Support Files/Pods-BaseProjectTests/Pods-BaseProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		A410656EC2FFC65ADEB85DCB /* Pods-BaseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.release.xcconfig"; path = "Target Support Files/Pods-BaseProject/Pods-BaseProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -258,6 +266,8 @@
 		53839DB923734094001F54C8 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				53839E0D23749886001F54C8 /* Login */,
+				53839E0C23749759001F54C8 /* AppStart */,
 				53839E0623749525001F54C8 /* Home */,
 				53839DD823734620001F54C8 /* LaunchScreen */,
 			);
@@ -384,6 +394,48 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		53839E0C23749759001F54C8 /* AppStart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppStart;
+			sourceTree = "<group>";
+		};
+		53839E0D23749886001F54C8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				53839E162374A78C001F54C8 /* View Model */,
+				53839E1123749945001F54C8 /* View */,
+				53839E0E23749890001F54C8 /* Coordinator */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		53839E0E23749890001F54C8 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				53839E0F237498E1001F54C8 /* LoginCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		53839E1123749945001F54C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				53839E1223749955001F54C8 /* LoginViewController.swift */,
+				53839E1323749955001F54C8 /* LoginViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		53839E162374A78C001F54C8 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				53839E172374A864001F54C8 /* LoginViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -496,6 +548,7 @@
 				53839DC023734352001F54C8 /* Localizable.strings in Resources */,
 				53839D9423733F3A001F54C8 /* LaunchScreen.storyboard in Resources */,
 				53839D9123733F3A001F54C8 /* Assets.xcassets in Resources */,
+				53839E1523749955001F54C8 /* LoginViewController.xib in Resources */,
 				53839E0B2374956F001F54C8 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,6 +679,7 @@
 			files = (
 				53839DC923734543001F54C8 /* Identifier+NameExtensions.swift in Sources */,
 				53839DF6237467E9001F54C8 /* AnyEncodable.swift in Sources */,
+				53839E10237498E1001F54C8 /* LoginCoordinator.swift in Sources */,
 				53839DCB23734543001F54C8 /* String+Extensions.swift in Sources */,
 				53839E0A2374956F001F54C8 /* HomeViewController.swift in Sources */,
 				53839DBD23734231001F54C8 /* Environment.swift in Sources */,
@@ -647,10 +701,12 @@
 				53839DF5237467E9001F54C8 /* FlowRequestComposer.swift in Sources */,
 				53839DEF237467E9001F54C8 /* URLRequest+Multipart.swift in Sources */,
 				53839DCA23734543001F54C8 /* Global+Extensions.swift in Sources */,
+				53839E1423749955001F54C8 /* LoginViewController.swift in Sources */,
 				53839DCD23734543001F54C8 /* UIStoryboard.swift in Sources */,
 				53839DD4237345D2001F54C8 /* Reachability.swift in Sources */,
 				53839DEB237467E9001F54C8 /* FlowError.swift in Sources */,
 				53839DCE23734543001F54C8 /* UIImage+Extensions.swift in Sources */,
+				53839E182374A864001F54C8 /* LoginViewModel.swift in Sources */,
 				53839DFC237482B5001F54C8 /* APIError.swift in Sources */,
 				53839DF1237467E9001F54C8 /* URLRequest+Encode.swift in Sources */,
 				53839DEE237467E9001F54C8 /* URLResponse+StatusCode.swift in Sources */,
