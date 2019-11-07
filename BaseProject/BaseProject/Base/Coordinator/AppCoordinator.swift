@@ -12,9 +12,13 @@ class AppCoordinator: Coordinator {
     
     var window: UIWindow
     var coordinators = [String: Coordinator]()
+    var loginCoordinator: LoginCoordinator?
+
     var isLoggedIn = false
     var isInvalidToken = false
     var foregroundWindow: UIWindow
+
+
 
     required init(window: UIWindow) {
         self.window = window
@@ -29,6 +33,7 @@ class AppCoordinator: Coordinator {
             // Home
         } else {
            // Login
+            navigateToLogin()
         }
     }
     
@@ -59,18 +64,11 @@ class AppCoordinator: Coordinator {
 //    }
 //}
 
-//extension AppCoordinator: LoginCoordinatorDelegate {
-//    func showLogin() {
-//        AppSecurityProfiler.context = .login
-//        isLoggedIn = false
-//        loginCoordinator = LoginCoordinator(window: self.window)
-//        loginCoordinator?.delegate = self
-//        loginCoordinator?.start(isInvalidToken: isInvalidToken)
-//    }
+extension AppCoordinator {
 
-//    func loginCoordinatorDidFinish(loginCoordinator: LoginCoordinator) {
-//        loginCoodinatorDidFinish()
-//        loginCoordinator.stop()
-//        self.loginCoordinator = nil
-//    }
-//}
+    func navigateToLogin() {
+        loginCoordinator = LoginCoordinator(window: self.window)
+        loginCoordinator?.start()
+    }
+
+}
