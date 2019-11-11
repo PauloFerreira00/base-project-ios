@@ -1,9 +1,9 @@
 //
 //  BaseService.swift
-//  PSMyAccount
+//  BaseProject
 //
-//  Created by Sergio Furlaneto on 21/12/18.
-//  Copyright © 2018 UOL inc. All rights reserved.
+//  Created by Paulo Ferreira de Jesus on 21/12/18.
+//  Copyright © 2019 Iteris Consultoria. All rights reserved.
 //
 
 import Foundation
@@ -29,12 +29,15 @@ class BaseService<T: FlowTarget>: NSObject, URLSessionDelegate {
         _ error: Error?) -> Void)?
     
     typealias CompletionHandlerPlain = ((_ response: URLResponse?, _ error: Error?) -> Void)?
-    #if DEVELOPMENT || QA
+
     var provider = FlowProvider<T>(debugMode: .verbose)
-    #else
-    var provider = FlowProvider<T>()
-    #endif
-    
+
+//    #if BaseProject
+//    var provider = FlowProvider<T>(debugMode: .verbose)
+//    #else
+//    var provider = FlowProvider<T>()
+//    #endif
+
     override init() {
         super.init()
         provider.requester.urlSessionDelegate = self
@@ -42,7 +45,7 @@ class BaseService<T: FlowTarget>: NSObject, URLSessionDelegate {
     
     func fetch(_ target: T, completion: CompletionHandlerPlain) {
         provider.request(target, queue) { data, response, error in
-            self.checkHeaderPermissions(response: response)
+
             if let e = self.checkForErrors(data, error: error) {
                 completion?(response, e)
                 return
@@ -56,7 +59,6 @@ class BaseService<T: FlowTarget>: NSObject, URLSessionDelegate {
                                  completion: CompletionHandler<Value>) {
         
         provider.request(target, queue) { data, response, error in
-            self.checkHeaderPermissions(response: response)
             if let e = self.checkForErrors(data, error: error) {
                 completion?(nil, response, e)
                 return
@@ -72,15 +74,27 @@ class BaseService<T: FlowTarget>: NSObject, URLSessionDelegate {
         }
     }
 
-    func urlSession(_ session: URLSession,
-                    didReceive challenge: URLAuthenticationChallenge,
-                    completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        if challenge.protectionSpace.host == "10.133.0.178" {
-            completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
-        } else {
-            completionHandler(.performDefaultHandling, nil)
+    func fetch<Value: BaseCodable>(_ target: T,
+                dataType: [Value].Type,
+                completion: CompletionHandler<[Value]>) {
+
+        provider.request(target, queue) { data, response, error in
+            if let e = self.checkForErrors(data, error: error) {
+                completion?(nil, response, e)
+                return
+            }
+            do {
+                guard let data = data else { return ( completion?(nil, response, nil))! }
+                let model = try JSONDecoder().decode(dataType.self, from: data)
+                completion?(model, response, nil)
+            } catch {
+                debugPrint("\n❓JSONDecoder -> \(error)\n")
+                let e = BaseError.parse(error)
+                completion?(nil, response, e)
+            }
         }
     }
+
 }
 
 // MARK: - Fetchs with ´switch´ completion
@@ -88,7 +102,7 @@ extension BaseService {
     
     func fetch(_ target: T, completion: RequestCompletionHandlerPlain?) {
         provider.request(target, queue) { data, response, error in
-            self.checkHeaderPermissions(response: response)
+
             if let e = self.checkForErrors(data, error: error) {
                 completion?(.failure(e))
                 return
@@ -127,6 +141,7 @@ extension BaseService {
 extension BaseService {
     func fetch(_ target: T,
                completion: DownloadCompletionHandler?) {
+
         provider.download(target, queue) { (location, response, error) in
             if let e = self.checkForErrors(nil, error: error) {
                 completion?(.failure(e))
@@ -142,30 +157,6 @@ extension BaseService {
                 completion?(.success(location))
             }
         }
-    }
-}
-
-// MARK: - check header permissions
-extension BaseService {
-    private func checkHeaderPermissions(response: URLResponse?) {
-        let permissionsHeaderKey = "X-Ibanking-Session-Additional-Permissions".lowercased()
-        guard let response = response as? HTTPURLResponse else { return }
-        if let permissions = response.allHeaderFields.first(where: { key, _ in
-            guard let key = key as? String else { return false }
-            return key.lowercased() == permissionsHeaderKey
-        }) {
-            guard let value = permissions.value as? String else { return }
-            let result = splitPermissionsResponse(value)
-        }
-    }
-    
-    private func splitPermissionsResponse(_ response: String) -> [String] {
-        var cleanResponse = response.replacingOccurrences(of: "[", with: "")
-        cleanResponse = cleanResponse.replacingOccurrences(of: "]", with: "")
-        cleanResponse = cleanResponse.replacingOccurrences(of: " ", with: "")
-        cleanResponse = cleanResponse.replacingOccurrences(of: "\"", with: "")
-        let splitedString: [String] = cleanResponse.split(separator: ",").map { String($0) }
-        return splitedString
     }
 }
 
@@ -189,6 +180,7 @@ private extension BaseService {
         }
     }
 }
+
 // MARK: - Cancel all Queue operations
 extension BaseService {
     func cancelAllOperations() {

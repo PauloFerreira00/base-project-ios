@@ -2,7 +2,7 @@
 //  PSError.swift
 //  PSDemo
 //
-//  Created by Sergio Furlaneto Filho on 24/01/2019.
+//  Created by Paulo Ferreira de Jesus on 24/01/2019.
 //  Copyright © 2019 Sergio Furlaneto Filho. All rights reserved.
 //
 
@@ -39,6 +39,7 @@ public enum BaseError: Error {
     case api(APIError)
     case parse(Error)
     case unknown
+    case generic(Error)
 }
 
 extension BaseError: BaseErrorProtocol {
@@ -59,6 +60,8 @@ extension BaseError: BaseErrorProtocol {
             return ErrorCode.parseError.rawValue
         case .unknown:
             return ErrorCode.unknown.rawValue
+        case .generic:
+            return ErrorCode.unknown.rawValue
         }
     }
     
@@ -71,6 +74,8 @@ extension BaseError: BaseErrorProtocol {
         case .parse:
             return BaseErrorMessage.unknown.rawValue
         case .unknown:
+            return BaseErrorMessage.unknown.rawValue
+        case .generic:
             return BaseErrorMessage.unknown.rawValue
         }
     }

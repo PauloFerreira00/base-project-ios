@@ -1,8 +1,8 @@
 //
 //  Flow
 //
-//  Created by Sergio Furlaneto Filho on 24/01/2019.
-//  Copyright © 2019 UOL inc. All rights reserved.
+//  Created by Paulo Ferreira de Jesus Filho on 24/01/2019.
+//  Copyright © 2019 Iteris Consultoria. All rights reserved.
 //
 
 import Foundation
