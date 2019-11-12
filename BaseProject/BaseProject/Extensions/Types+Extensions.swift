@@ -142,3 +142,18 @@ extension Array where Element: NSAttributedString {
     }
 }
 
+extension Int {
+
+    static var empty: Int {
+        return 0
+    }
+
+    static var zero: Int {
+        return 0
+    }
+
+    static var one: Int {
+        return 1
+    }
+
+}
