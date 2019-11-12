@@ -29,8 +29,8 @@ class LoginCoordinator: Coordinator {
 extension LoginCoordinator: LoginViewModelDelegate {
 
     func navigateToHome(_ viewModel: LoginViewModel) {
-        let viewController: HomeViewController = HomeViewController.instantiate()
-        self.navigation?.present(viewController, animated: true, completion: nil)
+        let homeCoordinator = HomeCoordinator(window: self.window)
+        homeCoordinator.start()
     }
 
 }
