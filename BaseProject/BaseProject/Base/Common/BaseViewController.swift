@@ -2,7 +2,7 @@
 //  BaseViewController.swift
 //  App
 //
-//  Created by Iteris Consultoria on 29/04/19.
+//  Created by Paulo Ferreira de Jesus on 29/04/19.
 //  Copyright © 2019 Iteris Consultoria. All rights reserved.
 //
 
