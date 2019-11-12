@@ -7,11 +7,11 @@
 //
 import UIKit
 
-extension UITableViewCell {
+extension UIView {
+    static var identifier: String { return String(describing: self) }
+}
 
-    static var identifier: String {
-        return String(describing: self)
-    }
+extension UITableViewCell {
 
     static var name: String {
         return String(describing: self)
@@ -19,10 +19,6 @@ extension UITableViewCell {
 }
 
 extension UICollectionViewCell {
-
-    static var identifier: String {
-        return String(describing: self)
-    }
 
     static var name: String {
         return String(describing: self)
